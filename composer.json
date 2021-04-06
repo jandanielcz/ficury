@@ -1,0 +1,27 @@
+{
+    "name": "jandanielcz/ficury",
+    "description": "Feature crawling",
+    "type": "project",
+    "license": "WTFPL",
+    "authors": [
+        {
+            "name": "Jan Daniel Dolezal",
+            "email": "dan@jandaniel.cz"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Ficury\\": "src/"
+        }
+    },
+    "require": {
+        "splitbrain/php-cli": "^1.1",
+        "symfony/cache": "^5.2",
+        "php-di/php-di": "^6.3",
+        "guzzlehttp/guzzle": "^7.3",
+        "elasticsearch/elasticsearch": "^7.12",
+        "psr/log": "^1.1",
+        "symfony/dom-crawler": "^5.2",
+        "symfony/css-selector": "^5.2"
+    }
+}

@@ -1,0 +1,5 @@
+.idea
+vendor
+composer.phar
+php.bat
+php_errors.log
