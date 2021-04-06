@@ -22,6 +22,7 @@ class FoxentryDownloader extends Downloader
     public function getHtml($url): ?string
     {
         return $this->cache->get($this->generateCacheKey(), function(ItemInterface $item) use ($url) {
+            $this->logger->info('No cache found.');
             $item->expiresAfter(60 * 5);
             return $this->download($url);
         });

@@ -5,8 +5,6 @@ namespace Ficury;
 
 
 use Psr\Container\ContainerInterface;
-use Psr\Log\LoggerInterface;
-use splitbrain\phpcli\Exception;
 use splitbrain\phpcli\Options;
 use splitbrain\phpcli\PSR3CLI;
 
@@ -25,7 +23,7 @@ class Cli extends PSR3CLI
     {
         $options->setHelp('Feature crawler.');
         $options->registerCommand('run', 'runs job');
-        $options->registerArgument('job', 'specify job to run', true, 'run');
+        $options->registerArgument('job', 'specify job classname to run', true, 'run');
 
     }
 
@@ -42,7 +40,13 @@ class Cli extends PSR3CLI
     protected function runJob(string $jobName)
     {
         if ($this->container->has($jobName)) {
-            return $this->container->get($jobName)->run();
+            $job = $this->container->get($jobName);
+            if ($job instanceof Job) {
+                return $job->run();
+            } else {
+                $this->fatal(sprintf('Job %s should be instance of Job.', $jobName));
+                exit;
+            }
         }
         $this->fatal(sprintf('Job %s not found.', $jobName));
         exit;
